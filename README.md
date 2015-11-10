@@ -53,6 +53,22 @@ npm install
 gulp
 ```
 
+The default gulp task creates a client/public/ directory which will be served statically by the server.
+This directory is organized as follows:
+```
+public/
+  |-js/
+  |  |-app.js               --> js file built by browserify
+  |-index.html              --> main template
+  |-partials/               --> partial views
+  |  |-home/                --> each module gets its own directory
+  |  |  |-home.html
+  |-i18n/                   --> translation files
+  |  |-home/                --> each module gets its own directory
+  |  |  |-fr.json
+  |  |  |-en.json
+```
+
 ### Server side
 
 ```sh
