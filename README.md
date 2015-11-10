@@ -1,5 +1,5 @@
 # modular-angular-node-app
-A starting kit for a modular Web application using Angular + browserify on client side and Node.JS + electrolyte on server side
+A starting kit for a modular Web application using [AngularJS](https://angularjs.org/) + [browserify](http://browserify.org/) on client side and [Node.js](https://nodejs.org/) + [electrolyte](https://github.com/jaredhanson/electrolyte) on server side
 
 Structure
 ---------
@@ -24,8 +24,8 @@ client/
   |  |-package.json
 ```
 
-The main app.js file defines the main Angular module of the application.
-An array of the names of external dependencies (listed in the package.json file) is created using the browserify require method:
+The main "app.js" file defines the main Angular module of the application.
+An array of the names of external dependencies (listed in the "package.json" file) is created using the browserify require method:
 ```js
 var deps = [
 	require('angular-ui-router'),
@@ -33,7 +33,7 @@ var deps = [
 	require('angular-translate-loader-partial')
 ];
 ```
-An array of the name of application modules is created in the same way (the index.js file in src/modules/ is responsible for requiring the different modules and putting their exported names in the exported array):
+An array of the name of application modules is created in the same way (the "index.js" file in "src/modules/" is responsible for requiring the different modules and putting their exported names in the exported array):
 ```js
 var modules = require('./modules');
 ```
@@ -53,7 +53,7 @@ npm install
 gulp
 ```
 
-The default gulp task creates a client/public/ directory which will be served statically by the server.
+The default gulp task creates a "client/public/" directory which will be served statically by the server.
 This directory is organized as follows:
 ```
 public/
@@ -68,6 +68,14 @@ public/
   |  |  |-fr.json
   |  |  |-en.json
 ```
+
+Launching
+```sh
+gulp watch
+```
+will watch:
+- js files and re-build the application in the public directory using [watchify](https://github.com/substack/watchify)
+- partials and i18n files and re-copy them in the public directory
 
 ### Server side
 
