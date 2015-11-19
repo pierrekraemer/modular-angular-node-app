@@ -2,14 +2,20 @@
   "name": "app-server",
   "version": "1.0.0",
   "description": "App - server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pierre Kraemer",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
-    "express": "^4.13.3"
+    "electrolyte": "^0.2.0",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "mysql": "^2.9.0",
+    "sequelize": "^3.13.0",
+    "serve-favicon": "^2.3.0"
   }
 }

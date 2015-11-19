@@ -1,8 +1,17 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
+'use strict';
+
+var
+express = require('express'),
+ioc = require('electrolyte'),
+bodyParser = require('body-parser'),
+favicon = require('serve-favicon'),
+path = require('path'),
+_ = require('lodash');
+
 
 var app = express();
+app.disable('x-powered-by');
+
 
 var publicPath = path.resolve('../client/public');
 
@@ -19,6 +28,44 @@ app.all('*', function (req, res, next) {
 		next();
 	}
 });
+
+
+ioc.use('config', ioc.node('config/'));
+ioc.use('models', ioc.node('models/'));
+ioc.use('controllers', ioc.node('controllers/'));
+ioc.use('services', ioc.node('services/'));
+ioc.use('routes', ioc.node('routes/'));
+
+
+var models = require('./models');
+models.forEach(function (model) {
+	model.associate(models);
+});
+
+
+var routers_data = require('./routes');
+routers_data.forEach(function (router_data) {
+	var router = express.Router();
+	
+	router_data.routes.forEach(function (route_data) {
+		var r = router.route(route_data.path);
+		route_data.usage.forEach(function (u) {
+			r[u.verb](u.func);
+		});
+	});
+
+	router.use(function (err, req, res, next) {
+		if (_.isUndefined(err.status)) {
+			return res.status(500).send(err.message);
+		} else {
+			return res.status(err.status).send(err.message);
+		}
+	});
+
+	app.use(router_data.prefix, router);
+});
+
+
 
 app.all('/*', function (req, res) {
 	res.sendFile(publicPath + '/index.html');
