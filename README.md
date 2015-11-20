@@ -1,5 +1,5 @@
 # modular-angular-node-app
-A starting kit for a modular Web application using [AngularJS](https://angularjs.org/) + [browserify](http://browserify.org/) on client side and [Node.js](https://nodejs.org/) + [electrolyte](https://github.com/jaredhanson/electrolyte) on server side
+A starting kit for a modular Web application using [AngularJS](https://angularjs.org/) + [browserify](http://browserify.org/) on client side and [Node.js](https://nodejs.org/) + [Express](http://expressjs.com/) + [electrolyte](https://github.com/jaredhanson/electrolyte) on server side
 
 Structure
 ---------
