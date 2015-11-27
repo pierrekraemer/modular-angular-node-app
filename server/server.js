@@ -14,9 +14,10 @@ app.disable('x-powered-by');
 
 
 var publicPath = path.resolve('../client/public');
-
 app.use(express.static(publicPath));
+
 app.use(bodyParser.json());
+
 app.all('*', function (req, res, next) {
 	res.set('Access-Control-Allow-Origin', 'http://localhost');
 	res.set('Access-Control-Allow-Credentials', true);

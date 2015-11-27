@@ -17,10 +17,6 @@ exports = module.exports = {
 		dialect: _DBtype
 		// logging: false
 	})
-	
-	// models : {
-	// 	// populated by models on load
-	// }
 };
 
 exports['@literal'] = true;
