@@ -1,5 +1,5 @@
 # modular-angular-node-app
-A starting kit for a modular Web application using [AngularJS](https://angularjs.org/) + [browserify](http://browserify.org/) on client side and [Node.js](https://nodejs.org/) + [electrolyte](https://github.com/jaredhanson/electrolyte) on server side
+A starting kit for a modular Web application using [AngularJS](https://angularjs.org/) + [browserify](http://browserify.org/) on client side and [Node.js](https://nodejs.org/) + [Express](http://expressjs.com/) + [electrolyte](https://github.com/jaredhanson/electrolyte) on server side
 
 Structure
 ---------
@@ -17,9 +17,12 @@ client/
   |  |  |-index.js             --> exports the list of modules
   |  |  |-home/                --> each module gets its own directory
   |  |  |  |-index.js          --> module definition
+  |  |  |  |-ctrl.js           --> module controller
   |  |  |  |-home.html         --> partial views
+  |  |  |  |-...
   |  |  |  |-fr.json           --> translation files
   |  |  |  |-en.json
+  |  |  |  |-...
   |  |-gulpfile.js
   |  |-package.json
 ```
@@ -40,6 +43,31 @@ var modules = require('./modules');
 All these dependencies are injected in the main Angular module:
 ```js
 angular.module('App', deps.concat(modules))
+```
+
+### Server side
+
+The server code is organized as follows:
+
+```
+server/
+  |-config/                    --> config
+  |  |-db.js
+  |  |-...
+  |-controllers/               --> controllers
+  |  |-user.js
+  |  |-...
+  |-models/                    --> models
+  |  |-index.js
+  |  |-user.js
+  |  |-...
+  |-routes/                    --> routes
+  |  |-index.js
+  |  |-user.js
+  |  |-...
+  |-services/                  --> services
+  |  |-...
+  |-package.json
 ```
 
 Deployment
