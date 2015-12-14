@@ -6,13 +6,14 @@ ioc = require('electrolyte');
 
 exports = module.exports = (function () {
 
-	var models = [];
+	var models = {};
 	
 	fs.readdirSync(__dirname)
 	.forEach(function (f) {
 		if (f !== 'index.js') {
 			var name = f.replace(/\.[^/.]+$/, '');
-			models.push(ioc.create('models/'+name));
+			var model = ioc.create('models/'+name);
+			models[model.name] = model;
 		}
 	});
 	

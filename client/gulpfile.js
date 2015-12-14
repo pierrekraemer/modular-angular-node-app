@@ -64,6 +64,7 @@ gulp.task('browserify', function () {
 gulp.task('watch', function() {
 	build(true);
 	gulp.watch(paths.appindex, [ 'copyAppIndex' ]);
+	gulp.watch(paths.partials, [ 'copyAppPartials' ]);
 });
 
 gulp.task('default', [ 'copyAppIndex', 'copyAppI18n', 'copyAppPartials', 'browserify' ]);

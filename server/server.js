@@ -3,7 +3,7 @@
 var
 express = require('express'),
 ioc = require('electrolyte'),
-bodyParser = require('body-parser'),
+body_parser = require('body-parser'),
 favicon = require('serve-favicon'),
 path = require('path'),
 _ = require('lodash');
@@ -13,10 +13,10 @@ var app = express();
 app.disable('x-powered-by');
 
 
-var publicPath = path.resolve('../client/public');
-app.use(express.static(publicPath));
+var public_path = path.resolve('../client/public');
+app.use(express.static(public_path));
 
-app.use(bodyParser.json());
+app.use(body_parser.json());
 
 app.all('*', function (req, res, next) {
 	res.set('Access-Control-Allow-Origin', 'http://localhost');
@@ -38,15 +38,20 @@ ioc.use('services', ioc.node('services/'));
 ioc.use('routes', ioc.node('routes/'));
 
 
+var db = ioc.create('config/db');
+
 var models = require('./models');
-models.forEach(function (model) {
-	model.associate(models);
-});
+for (var model_name in models) {
+	if (models.hasOwnProperty(model_name)) {
+		var model = models[model_name];
+		model.associate(models);
+	}
+}
 
 
 var routers_data = require('./routes');
 routers_data.forEach(function (router_data) {
-	var router = express.Router();
+	var router = express.Router({ mergeParams: true });
 	
 	router_data.routes.forEach(function (route_data) {
 		var r = router.route(route_data.path);
@@ -69,7 +74,7 @@ routers_data.forEach(function (router_data) {
 
 
 app.all('/*', function (req, res) {
-	res.sendFile(publicPath + '/index.html');
+	res.sendFile(public_path + '/index.html');
 });
 
 var server = app.listen(3000, function () {

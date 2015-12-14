@@ -1,9 +1,9 @@
 'use strict';
 
 var angular = require('angular');
-var moduleName = 'Home';
+var module_name = 'Home';
 
-angular.module(moduleName, [])
+angular.module(module_name, [])
 
 .config(function ($stateProvider, $translatePartialLoaderProvider) {
 	
@@ -11,18 +11,21 @@ angular.module(moduleName, [])
 
 	$stateProvider
 	.state('root.home', {
-		url   : '/',
-		views : {
-			'main' : {
-				controller  : require('./ctrl.js'),
+		url  : '/',
+		views: {
+			'main@' : {
+				controller  : 'HomeCtrl',
+				controllerAs: 'vm',
 				templateUrl : 'partials/home/home.html'
 			}
 		},
-		data  : {
-			pageTitle : 'Home'
+		data : {
+			page_title: 'Home'
 		}
 	});
 
 });
 
-module.exports = moduleName;
+require('./ctrl.js')(module_name, 'HomeCtrl');
+
+module.exports = module_name;
