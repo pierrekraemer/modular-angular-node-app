@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 
-<html ng-app="App" ng-controller="MainCtrl as vm" lang="en">
-	
+<html>
+
 	<head>
 		<meta charset="UTF-8">
-		<title> {{ vm.data.title }} </title>
-		<base href="/">
+		<title> My app title </title>
+		<!-- <base href="/"> -->
 	</head>
-	
-	<body>
-		<ul>
-			<li> <a ui-sref="root.home"> {{ vm.data.app_name }} - Home </a> </li>
-			<li> <a href="" ng-click="vm.change_lang('en')"> EN </a> </li>
-			<li> <a href="" ng-click="vm.change_lang('fr')"> FR </a> </li>
-		</ul>
-		
-		<main ui-view="main"> </main>
-		
+
+	<body ng-app="app">
+		<main ui-view> </main>
 		<script src="js/app.js"></script>
 	</body>
-	
+
 </html>
