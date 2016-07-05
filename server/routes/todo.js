@@ -1,37 +1,37 @@
 'use strict';
 
-exports = module.exports = function (userCtrl) {
+exports = module.exports = function (todoCtrl) {
 
 	return {
-		prefix: '/user',
+		prefix: '/todo',
 		routes: [
 			{
 				path: '/',
 				usage: [
 					{
 						verb: 'get',
-						func: [ userCtrl.getAll ]
+						func: [ todoCtrl.getAll ]
 					},
 					{
 						verb: 'post',
-						func: [ userCtrl.create ]
+						func: [ todoCtrl.create ]
 					}
 				]
 			},
 			{
-				path: '/:userid',
+				path: '/:todoid',
 				usage: [
 					{
 						verb: 'get',
-						func: [ userCtrl.getById ]
+						func: [ todoCtrl.getById ]
 					},
 					{
 						verb: 'put',
-						func: [ userCtrl.updateById ]
+						func: [ todoCtrl.updateById ]
 					},
 					{
 						verb: 'delete',
-						func: [ userCtrl.deleteById ]
+						func: [ todoCtrl.deleteById ]
 					}
 				]
 			}
@@ -41,7 +41,7 @@ exports = module.exports = function (userCtrl) {
 };
 
 exports['@require'] = [
-	'controllers/user'
+	'controllers/todo'
 ];
 
 exports['@singleton'] = true;

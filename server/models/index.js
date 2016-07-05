@@ -1,22 +1,22 @@
 'use strict';
 
-var
+const
 fs = require('fs'),
 ioc = require('electrolyte');
 
-exports = module.exports = (function () {
+exports = module.exports = (() => {
 
-	var models = {};
-	
+	const models = {};
+
 	fs.readdirSync(__dirname)
-	.forEach(function (f) {
-		if (f !== 'index.js') {
-			var name = f.replace(/\.[^/.]+$/, '');
-			var model = ioc.create('models/'+name);
+	.forEach((filename) => {
+		if (filename !== 'index.js') {
+			const name = filename.replace(/\.[^/.]+$/, '');
+			const model = ioc.create('models/' + name);
 			models[model.name] = model;
 		}
 	});
-	
+
 	return models;
-	
-}());
+
+})();

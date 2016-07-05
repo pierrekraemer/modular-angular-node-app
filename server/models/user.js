@@ -1,13 +1,14 @@
 'use strict';
 
-var
+const
 Sequelize = require('sequelize'),
 bcrypt = require('bcrypt-nodejs');
 
 var
 db_,
-User_,
+User_;
 
+const
 name_ = 'User',
 
 model_ = {
@@ -26,18 +27,16 @@ model_ = {
 
 classMethods_ = {
 	associate: function (models) {
-		// User_.hasOne(models.OtherModel);
+		User_.hasMany(models.Todo);
 		// User_.belongsToMany(models.OtherModel);
 	},
-	generateHash: function (password) {
-		return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-	},
-	roles: function () {
-		return {
+	generateHash: (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null),
+	roles: () => (
+		{
 			admin: 'admin',
 			user: 'user'
-		};
-	}
+		}
+	)
 },
 
 instanceMethods_ = {
@@ -45,17 +44,17 @@ instanceMethods_ = {
 		return bcrypt.compareSync(password, this.password);
 	},
 	hasRole : function (role) {
-		return this.roles.indexOf(role) > -1;
+		return this.roles.includes(role);
 	},
 	addRole : function (role) {
-		if (this.roles.indexOf(role) < 0) {
+		if (!this.roles.includes(role)) {
 			this.roles.push(role);
 		}
 	}
 };
 
 
-exports = module.exports = function (db) {
+exports = module.exports = (db) => {
 	db_ = db;
 	User_ = db.connection.define(
 		name_,
@@ -65,8 +64,7 @@ exports = module.exports = function (db) {
             instanceMethods : instanceMethods_
         }
 	);
-	// db.models[name_] = User_;
-	
+
 	return User_;
 };
 

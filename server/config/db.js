@@ -1,14 +1,14 @@
 'use strict';
 
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
-var
-_DBname = 'dbname',
-_DBtype = 'mysql',
-_DBuser = 'username',
-_DBpw   = 'password',
+const
+_DBname = 'apptest',
+_DBuser = 'apptest',
+_DBpw   = 'apptest',
 _DBhost = 'localhost',
-_DBport = 3306;
+_DBport = 3306,
+_DBtype = 'mysql';
 
 exports = module.exports = {
 	connection: new Sequelize(_DBname, _DBuser, _DBpw, {

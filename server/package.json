@@ -10,12 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.14.1",
-    "electrolyte": "^0.2.0",
-    "express": "^4.13.3",
-    "lodash": "^3.10.1",
-    "mysql": "^2.9.0",
-    "sequelize": "^3.13.0",
+    "body-parser": "^1.15.2",
+    "electrolyte": "^0.2.6",
+    "express": "^4.14.0",
+    "lodash": "^4.13.1",
+    "mysql": "^2.11.1",
+    "sequelize": "^3.23.4",
     "serve-favicon": "^2.3.0"
   }
 }

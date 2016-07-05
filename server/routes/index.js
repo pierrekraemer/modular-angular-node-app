@@ -1,21 +1,21 @@
 'use strict';
 
-var
+const
 fs = require('fs'),
 ioc = require('electrolyte');
 
-exports = module.exports = (function () {
+exports = module.exports = (() => {
 
-	var routes = [];
-	
+	const routes = [];
+
 	fs.readdirSync(__dirname)
-	.forEach(function (f) {
-		if (f !== 'index.js') {
-			var name = f.replace(/\.[^/.]+$/, '');
-			routes.push(ioc.create('routes/'+name));
+	.forEach((filename) => {
+		if (filename !== 'index.js') {
+			const name = filename.replace(/\.[^/.]+$/, '');
+			routes.push(ioc.create('routes/' + name));
 		}
 	});
-	
+
 	return routes;
-	
-}());
+
+})();

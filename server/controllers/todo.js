@@ -1,31 +1,31 @@
 'use strict';
 
-exports = module.exports = (userModel) => (
+exports = module.exports = (todoModel) => (
 	{
 		getAll : (req, res, next) => {
-			console.log('user : getAll');
+			console.log('todo : getAll');
 		},
 
 		getById : (req, res, next) => {
-			console.log('user : getById');
+			console.log('todo : getById');
 		},
 
 		create : (req, res, next) => {
-			console.log('user : create');
+			console.log('todo : create');
 		},
 
 		updateById : (req, res, next) => {
-			console.log('user : updateById');
+			console.log('todo : updateById');
 		},
 
 		deleteById : (req, res, next) => {
-			console.log('user : deleteById');
+			console.log('todo : deleteById');
 		}
 	}
 );
 
 exports['@require'] = [
-	'models/user'
+	'models/todo'
 ];
 
 exports['@singleton'] = true;
