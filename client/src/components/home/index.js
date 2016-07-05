@@ -12,8 +12,8 @@ const home = angular
 
 .config(($stateProvider) => {
     $stateProvider
-    .state('root.home', {
-        url: 'home',
+    .state('home', {
+        url: '/',
         component: 'home'
     });
 })

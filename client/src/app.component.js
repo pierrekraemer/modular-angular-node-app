@@ -1,7 +1,18 @@
+import './app.css';
+
 const AppComponent = {
     template: `
-        <a ui-sref="root.home"> Home </a>
-        <div ui-view></div>
+        <nav>
+            <app-nav></app-nav>
+        </nav>
+
+        <main>
+            <div ui-view></div>
+        </main>
+
+        <footer>
+            <app-footer></app-footer>
+        </footer>
     `
 };
 

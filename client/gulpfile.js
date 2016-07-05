@@ -1,7 +1,8 @@
-var gulp = require('gulp');
-var webpack = require('gulp-webpack');
+const gulp = require('gulp');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 
-var paths = {
+const paths = {
 	appjs    : './src/app.js',
 	appindex : './src/index.html',
 	dist     : './public/'
@@ -9,16 +10,20 @@ var paths = {
 
 gulp.task('build', function () {
 	return gulp.src(paths.appjs)
-    .pipe(webpack({
+    .pipe(webpackStream({
 		module : {
 			loaders : [
 				{
 					test: /\.js$/,
-					exclude: /node_modules/,
+					exclude: /(node_modules)/,
 					loader: 'babel', // 'babel-loader' is also a legal name to reference
 					query: {
 						presets: ['es2015']
 					}
+				},
+				{
+					test: /\.css$/,
+					loader: 'style!css'
 				}
 			]
 		},
