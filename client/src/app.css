@@ -1,21 +1,25 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
-
-* {
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
-}
-
+/* Sticky footer styles
+-------------------------------------------------- */
 html {
-	font-size: 62.5%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	font-size: 1.6rem;
-	margin: 0;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+app > footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+    padding: 15px 0;
+}
+
+app > .container {
+    padding: 60px 15px 0;
 }

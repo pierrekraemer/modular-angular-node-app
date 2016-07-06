@@ -1,5 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ngAnimate from 'angular-animate';
 
 import AppComponent from './app.component';
 
@@ -10,7 +11,8 @@ const root = angular
 .module('app', [
 	Components,
 	Common,
-	uiRouter
+	uiRouter,
+	ngAnimate
 ])
 
 .component('app', AppComponent)

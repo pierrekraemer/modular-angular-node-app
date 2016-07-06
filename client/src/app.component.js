@@ -2,16 +2,16 @@ import './app.css';
 
 const AppComponent = {
     template: `
-        <nav>
-            <app-nav></app-nav>
-        </nav>
+        <app-nav></app-nav>
 
-        <main>
+        <main class="container">
             <div ui-view></div>
         </main>
 
         <footer>
-            <app-footer></app-footer>
+            <div class="container">
+                <p> Powered by Angular components </p>
+            </div>
         </footer>
     `
 };

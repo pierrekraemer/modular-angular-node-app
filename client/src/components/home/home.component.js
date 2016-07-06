@@ -3,7 +3,9 @@ import controller from './home.controller';
 const HomeComponent = {
     controller,
     template: `
-        <h1> Welcome home :-) </h1>
+        <div class="page-header">
+            <h1> Welcome home :-) </h1>
+        </div>
 
         <label>Username</label>
         <input type="text" ng-model="$ctrl.user.name">
