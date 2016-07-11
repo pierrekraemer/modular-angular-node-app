@@ -7,9 +7,7 @@ const home = angular
 .module('home', [
     uiRouter
 ])
-
 .component('home', HomeComponent)
-
 .config(($stateProvider) => {
     $stateProvider
     .state('home', {
