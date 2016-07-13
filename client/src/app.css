@@ -23,3 +23,7 @@ app > footer {
 app > .container {
     padding: 60px 15px 0;
 }
+
+.mt-15 {
+	margin-top: 15px;
+}

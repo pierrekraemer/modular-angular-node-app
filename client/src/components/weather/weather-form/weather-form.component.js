@@ -1,0 +1,19 @@
+import controller from './weather-form.controller';
+
+const WeatherFormComponent = {
+	controller,
+	bindings: {
+		onAddCity: '&'
+	},
+    template: `
+		<form ng-submit="$ctrl.addCity()">
+			<div class="input-group">
+				<span class="input-group-addon" id="cityName"> <span class="glyphicon glyphicon-globe"></span> </span>
+				<input type="text" class="form-control" placeholder="City name" autofocus ng-model="$ctrl.newCity.name">
+				<span class="input-group-btn"> <button class="btn btn-primary" type="submit"> Add </button> </span>
+			</div>
+		</form>
+    `
+};
+
+export default WeatherFormComponent;

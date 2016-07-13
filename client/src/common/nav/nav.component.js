@@ -18,6 +18,7 @@ const NavComponent = {
                     <ul class="nav navbar-nav">
                         <li ui-sref-active="active"> <a ui-sref="about"> About </a> </li>
                         <li ui-sref-active="active"> <a ui-sref="contact"> Contact </a> </li>
+                        <li ui-sref-active="active"> <a ui-sref="weather"> Weather </a> </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown" uib-dropdown>

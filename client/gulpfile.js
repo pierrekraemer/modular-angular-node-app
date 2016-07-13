@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 
 const paths = {
@@ -7,6 +6,11 @@ const paths = {
 	appindex : './src/index.html',
 	dist     : './public/'
 };
+
+gulp.task('copyAppIndex', function () {
+	return gulp.src(paths.appindex)
+	.pipe(gulp.dest(paths.dist));
+});
 
 gulp.task('build', function () {
 	return gulp.src(paths.appjs)
@@ -34,9 +38,8 @@ gulp.task('build', function () {
 	.pipe(gulp.dest(paths.dist + 'js/'));
 });
 
-gulp.task('copyAppIndex', function () {
-	return gulp.src(paths.appindex)
-	.pipe(gulp.dest(paths.dist));
+gulp.task('watch', function () {
+	gulp.watch([ './src/**/*.js' ], [ 'build' ]);
 });
 
-gulp.task('default', [ 'copyAppIndex', 'build' ]);
+gulp.task('default', [ 'copyAppIndex', 'build', 'watch' ]);

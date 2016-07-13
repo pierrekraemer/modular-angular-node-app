@@ -4,10 +4,10 @@ const NavController = function () {
         isNavbarCollapsed: true
     };
 
-    angular.extend(this, {
+    Object.assign(this, {
         data
     });
 
-}
+};
 
 export default NavController;
