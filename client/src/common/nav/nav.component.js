@@ -24,7 +24,7 @@ const NavComponent = {
                         <li class="dropdown" uib-dropdown>
                             <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button"> <span class="glyphicon glyphicon-user"></span> <span class="caret"></span> </a>
                             <ul class="dropdown-menu" uib-dropdown-menu>
-                                <li> <a href="signin"> Sign in </a> </li>
+                                <li> <a ui-sref="userSignin"> Sign in </a> </li>
                             </ul>
                         </li>
                     </ul>

@@ -4,20 +4,21 @@ import ngAnimate from 'angular-animate';
 
 import AppComponent from './app.component';
 
-import Components from './components';
 import Common from './common';
+import Components from './components';
 
 const root = angular
 .module('app', [
-	Components,
 	Common,
+	Components,
 	uiRouter,
 	ngAnimate
 ])
 
 .component('app', AppComponent)
 
-.config(($urlRouterProvider, $locationProvider, $stateProvider) => {
+.config(($httpProvider, $urlRouterProvider, $locationProvider) => {
+	$httpProvider.interceptors.push('JWTInterceptor');
 	$urlRouterProvider.otherwise("/");
 	$locationProvider.html5Mode(true);
 });
