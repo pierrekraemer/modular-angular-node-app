@@ -7,7 +7,7 @@ import AppComponent from './app.component';
 import Common from './common';
 import Components from './components';
 
-const root = angular
+angular
 .module('app', [
 	Common,
 	Components,
@@ -17,8 +17,18 @@ const root = angular
 
 .component('app', AppComponent)
 
-.config(($httpProvider, $urlRouterProvider, $locationProvider) => {
+.config(($httpProvider, $urlRouterProvider, $locationProvider, $stateProvider) => {
 	$httpProvider.interceptors.push('JWTInterceptor');
+	
 	$urlRouterProvider.otherwise("/");
 	$locationProvider.html5Mode(true);
+	
+	$stateProvider
+	.state('root', {
+        abstract: true,
+		component: 'app',
+		resolve: {
+			authData: (AuthService) => AuthService.getData()
+		}
+    });
 });

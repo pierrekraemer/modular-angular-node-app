@@ -1,8 +1,11 @@
 import './app.css';
 
 const AppComponent = {
+	bindings: {
+		authData: '<'
+	},
     template: `
-        <app-nav></app-nav>
+        <app-nav auth-data="$ctrl.authData"></app-nav>
 
         <main class="container">
             <div ui-view></div>

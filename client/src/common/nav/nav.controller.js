@@ -1,4 +1,4 @@
-const NavController = function () {
+const NavController = function (AuthService) {
 
     const data = {
         isNavbarCollapsed: true

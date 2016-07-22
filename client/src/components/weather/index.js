@@ -17,7 +17,7 @@ const weather = angular
 .component('weather', WeatherComponent)
 .config(($stateProvider) => {
     $stateProvider
-    .state('weather', {
+    .state('root.weather', {
         url: '/weather',
         component: 'weather'
     });

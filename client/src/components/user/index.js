@@ -12,10 +12,18 @@ const user = angular
 .component('userSignin', UserSigninComponent)
 .config(($stateProvider) => {
     $stateProvider
-    .state('userSignin', {
+    .state('root.userSignin', {
         url: '/signin',
         component: 'userSignin'
-    });
+    })
+	.state('root.userSignout', {
+		url: '/signout',
+		template: '<h1>Signing out...</h1>',
+		controller: (AuthService, $state) => {
+			AuthService.signout();
+			$state.go('root.home');
+		}
+	});
 })
 .name;
 

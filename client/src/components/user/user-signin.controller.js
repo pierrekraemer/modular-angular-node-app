@@ -1,4 +1,4 @@
-const UserSigninController = function (UserService) {
+const UserSigninController = function (UserService, $state) {
 
     const data = {
         credentials: {
@@ -11,7 +11,7 @@ const UserSigninController = function (UserService) {
     const signin = () => {
         UserService.signin(data.credentials)
         .then(function () {
-            data.message = 'Success';
+			$state.go('root.home');
         })
         .catch(function (err) {
             data.message = err.message;
