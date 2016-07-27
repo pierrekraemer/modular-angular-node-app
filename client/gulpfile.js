@@ -28,6 +28,10 @@ gulp.task('build', function () {
 				{
 					test: /\.css$/,
 					loader: 'style!css'
+				},
+				{
+					test: /\.html$/,
+					loader: 'html?attrs=false'
 				}
 			]
 		},

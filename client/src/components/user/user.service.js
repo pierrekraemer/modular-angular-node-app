@@ -1,16 +1,16 @@
-const UserService = (AuthService, $http) => ({
+const UserModel = {
 
-    signin: (credentials) => {
-        return AuthService.signin('/api/user/signin', credentials);
-    },
-	
-	signout: () => {
-		AuthService.signout();
-	},
-	
-	currentUser: () => {
-		return AuthService.currentUser();
-	}
+    hasRole: function (role) { return this.roles && this.roles.indexOf(role) > -1 }
+
+};
+
+const UserService = ($http) => ({
+
+    makeUser: (data) => {
+        const u = Object.create(UserModel);
+        Object.assign(u, data);
+        return u;
+    }
 
 });
 

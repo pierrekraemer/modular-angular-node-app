@@ -1,4 +1,4 @@
-const UserSigninController = function (UserService, $state) {
+const UserSigninController = function (UserService, AuthService, $state) {
 
     const data = {
         credentials: {
@@ -9,7 +9,7 @@ const UserSigninController = function (UserService, $state) {
 	};
 
     const signin = () => {
-        UserService.signin(data.credentials)
+        AuthService.signin(data.credentials)
         .then(function () {
 			$state.go('root.home');
         })

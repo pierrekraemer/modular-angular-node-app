@@ -5,7 +5,7 @@ const AppComponent = {
 		authData: '<'
 	},
     template: `
-        <app-nav auth-data="$ctrl.authData"></app-nav>
+        <app-nav></app-nav>
 
         <main class="container">
             <div ui-view></div>

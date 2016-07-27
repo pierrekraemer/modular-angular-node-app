@@ -1,4 +1,5 @@
 import controller from './weather-city-card.controller';
+import template from './weather-city-card.template.html';
 
 const WeatherCityCardComponent = {
 	controller,
@@ -7,22 +8,7 @@ const WeatherCityCardComponent = {
 		onRefresh: '&',
 		onClose: '&'
 	},
-    template: `
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title pull-left"> {{ $ctrl.city.name }} </h3>
-				<button type="button" class="close pull-right" ng-click="$ctrl.close()"> &times; </button>
-				<div class="clearfix"></div>
-			</div>
-			<div class="panel-body">
-				<em>Temp :</em> {{ $ctrl.city.main.temp }}°C
-				<br>
-				<em>Humidity :</em> {{ $ctrl.city.main.humidity }}%
-				<br>
-				<button class="btn btn-primary pull-right" ng-click="$ctrl.refresh()"> <span class="glyphicon glyphicon-refresh"></span> </button>
-			</div>
-		</div>
-    `
+    template
 };
 
 export default WeatherCityCardComponent;

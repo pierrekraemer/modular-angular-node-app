@@ -5,7 +5,8 @@ const NavController = function (AuthService) {
     };
 
     Object.assign(this, {
-        data
+        data,
+        AuthService
     });
 
 };

@@ -1,21 +1,9 @@
 import controller from './weather.controller';
+import template from './weather.template.html';
 
 const WeatherComponent = {
 	controller,
-    template: `
-		<div class="row mt-15">
-			<weather-form class="col-sm-10 col-xs-8" on-add-city="$ctrl.addCity(data)"> </weather-form>
-			<div class="col-sm-2 col-xs-4">
-				<button class="btn btn-primary" ng-click="$ctrl.refreshAll()"> <span class="glyphicon glyphicon-refresh"></span> Refresh all </button>
-			</div>
-		</div>
-		
-		<div class="row mt-15">
-			<div ng-repeat="city in $ctrl.cities" class="col-sm-4 col-xs-6">
-				<weather-city-card city="city" on-refresh="$ctrl.refreshCity($index)" on-close="$ctrl.removeCity($index)"> </weather-city-card>
-			</div>
-		</div>
-    `
+    template
 };
 
 export default WeatherComponent;

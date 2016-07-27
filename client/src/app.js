@@ -19,16 +19,16 @@ angular
 
 .config(($httpProvider, $urlRouterProvider, $locationProvider, $stateProvider) => {
 	$httpProvider.interceptors.push('JWTInterceptor');
-	
+
 	$urlRouterProvider.otherwise("/");
 	$locationProvider.html5Mode(true);
-	
+
 	$stateProvider
 	.state('root', {
         abstract: true,
 		component: 'app',
 		resolve: {
-			authData: (AuthService) => AuthService.getData()
+			auth: (AuthService) => AuthService.whoAmI()
 		}
     });
 });
