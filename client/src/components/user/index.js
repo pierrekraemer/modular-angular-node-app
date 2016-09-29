@@ -12,16 +12,17 @@ const user = angular
 .component('userSignin', UserSigninComponent)
 .config(($stateProvider) => {
     $stateProvider
-    .state('root.userSignin', {
+    .state('app.signin', {
         url: '/signin',
         component: 'userSignin'
     })
-	.state('root.userSignout', {
+	.state('app.signout', {
 		url: '/signout',
-		template: '<h1>Signing out...</h1>',
-		controller: (AuthService, $state) => {
-			AuthService.signout();
-			$state.go('root.home');
+		onEnter: function ($state, AuthService) {
+			AuthService.signout()
+			.then(() => {
+				$state.go('app.home', {}, { reload: true });
+			});
 		}
 	});
 })

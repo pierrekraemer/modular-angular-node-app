@@ -4,18 +4,28 @@ import ngAnimate from 'angular-animate';
 
 import AppComponent from './app.component';
 
-import Common from './common';
-import Components from './components';
+import common from './common';
+import components from './components';
 
 angular
 .module('app', [
-	Common,
-	Components,
+	common,
+	components,
 	uiRouter,
 	ngAnimate
 ])
 
 .component('app', AppComponent)
+
+.run(($transitions) => {
+	$transitions.onBefore(
+		{ to: (state) => state.data && state.data.authRequired },
+		(transition) => {
+			const AuthService = transition.injector().get('AuthService');
+			return AuthService.isSignedIn();
+		}
+	);
+})
 
 .config(($httpProvider, $urlRouterProvider, $locationProvider, $stateProvider) => {
 	$httpProvider.interceptors.push('JWTInterceptor');
@@ -24,11 +34,11 @@ angular
 	$locationProvider.html5Mode(true);
 
 	$stateProvider
-	.state('root', {
-        abstract: true,
+	.state('app', {
+		redirectTo: 'app.home',
 		component: 'app',
 		resolve: {
-			auth: (AuthService) => AuthService.whoAmI()
+			user: (AuthService) => AuthService.user()
 		}
     });
 });

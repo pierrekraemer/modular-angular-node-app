@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const webpackStream = require('webpack-stream');
 
 const paths = {
-	appjs    : './src/app.js',
+	appjs    : './src/app.module.js',
 	appindex : './src/index.html',
 	dist     : './public/'
 };

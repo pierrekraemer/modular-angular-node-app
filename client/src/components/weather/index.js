@@ -17,8 +17,11 @@ const weather = angular
 .component('weather', WeatherComponent)
 .config(($stateProvider) => {
     $stateProvider
-    .state('root.weather', {
+    .state('app.weather', {
         url: '/weather',
+		data: {
+			authRequired: true
+		},
         component: 'weather'
     });
 })

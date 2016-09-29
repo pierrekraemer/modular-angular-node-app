@@ -1,6 +1,8 @@
-const UserSigninController = function (UserService, AuthService, $state) {
+const UserSigninController = function ($state, AuthService) {
+	
+	const ctrl = this;
 
-    const data = {
+    ctrl.data = {
         credentials: {
     		name: '',
             password: ''
@@ -8,21 +10,16 @@ const UserSigninController = function (UserService, AuthService, $state) {
         message: ''
 	};
 
-    const signin = () => {
-        AuthService.signin(data.credentials)
-        .then(function () {
-			$state.go('root.home');
-        })
+    ctrl.signin = () => {
+        AuthService.signin(ctrl.data.credentials)
+		.then(function () {
+			$state.go('app.home', {}, { reload: true });
+		})
         .catch(function (err) {
-            data.message = err.message;
-            data.credentials.password = '';
+            ctrl.data.message = err.message;
+            ctrl.data.credentials.password = '';
         });
     };
-
-	Object.assign(this, {
-		data,
-        signin
-	});
 
 };
 

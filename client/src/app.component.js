@@ -1,22 +1,12 @@
 import './app.css';
 
+import template from './app.template.html';
+
 const AppComponent = {
 	bindings: {
-		authData: '<'
+		user: '<'
 	},
-    template: `
-        <app-nav></app-nav>
-
-        <main class="container">
-            <div ui-view></div>
-        </main>
-
-        <footer>
-            <div class="container">
-                <p> Powered by Angular components </p>
-            </div>
-        </footer>
-    `
+    template
 };
 
 export default AppComponent;

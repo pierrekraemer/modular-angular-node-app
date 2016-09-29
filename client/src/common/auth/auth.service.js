@@ -12,6 +12,7 @@ export const JWTInterceptor = ($window) => ({
 
 export const AuthService = ($http, $window, $q, UserService) => {
 
+	let signedIn = false;
 	let user = null;
 
 	return {
@@ -20,29 +21,36 @@ export const AuthService = ($http, $window, $q, UserService) => {
 			// return $http.post('/api/user/login', credentials)
 			// .then((res) => {
 			// 	$window.sessionStorage['token'] = res.data.token;
-			// 	user = UserService.makeUser(res.data.user);
+			// 	return UserService.makeUser(res.data.user);
 			// });
-            user = UserService.makeUser({
+			
+			$window.sessionStorage['token'] = 'blabla';
+			signedIn = true;
+			
+			user = UserService.makeUser({
 				name: credentials.name,
-                roles: ['user', 'admin']
+				roles: ['user', 'admin']
 			});
 			return $q.resolve();
+			
+			// return $q.resolve(
+			// 	UserService.makeUser({
+			// 		name: credentials.name,
+            //     	roles: ['user', 'admin']
+			// 	})
+			// );
 		},
-
-        whoAmI: () => {
-            return $q.resolve(true);
-        },
-
-		isSignedIn: () => {
-			return user !== null;
-		},
-
-        currentUser: () => user,
-
+		
 		signout: () => {
 			delete $window.sessionStorage['token'];
+			signedIn = false;
 			user = null;
-		}
+			return $q.resolve();
+		},
+		
+		isSignedIn: () => signedIn,
+		
+		user: () => user
 
 	};
 

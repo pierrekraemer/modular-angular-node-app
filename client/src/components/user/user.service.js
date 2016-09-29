@@ -1,6 +1,6 @@
 const UserModel = {
 
-    hasRole: function (role) { return this.roles && this.roles.indexOf(role) > -1 }
+    hasRole: function (role) { return this.roles && this.roles.indexOf(role) > -1; }
 
 };
 

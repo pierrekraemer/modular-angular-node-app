@@ -10,7 +10,7 @@ const about = angular
 .component('about', AboutComponent)
 .config(($stateProvider) => {
     $stateProvider
-    .state('root.about', {
+    .state('app.about', {
         url: '/about',
         component: 'about'
     });
