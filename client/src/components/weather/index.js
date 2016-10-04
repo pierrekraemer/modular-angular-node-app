@@ -1,5 +1,4 @@
 import angular from 'angular';
-import uiRouter from 'angular-ui-router';
 
 import weatherForm from './weather-form';
 import weatherCityCard from './weather-city-card';
@@ -9,7 +8,6 @@ import WeatherComponent from './weather.component';
 
 const weather = angular
 .module('weather', [
-    uiRouter,
 	weatherForm,
 	weatherCityCard
 ])

@@ -1,0 +1,19 @@
+<span ng-if="!$ctrl.todo.done">
+	<a href="" ng-click="$ctrl.done()" class="btn btn-small text-success">
+		<span class="glyphicon glyphicon glyphicon-ok"></span>
+	</a>
+	{{ $ctrl.todo.text }}
+</span>
+
+<span ng-if="$ctrl.todo.done">
+	<a href="" ng-click="$ctrl.undone()" class="btn btn-small text-warning">
+		<span class="glyphicon glyphicon glyphicon-repeat"></span>
+	</a>
+	<del> {{ $ctrl.todo.text }} </del>
+</span>
+
+<span class="pull-right">
+	<a href="" ng-click="$ctrl.remove()" class="btn btn-small text-danger">
+		<span class="glyphicon glyphicon glyphicon-trash"></span>
+	</a>
+</span>

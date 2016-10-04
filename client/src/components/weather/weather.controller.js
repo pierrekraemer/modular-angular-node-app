@@ -1,41 +1,35 @@
 const WeatherController = function (WeatherService) {
 	
-	const cities = [];
+	const ctrl = this;
 	
-	const addCity = (city) => {
+	ctrl.cities = [];
+	
+	ctrl.addCity = (city) => {
 		WeatherService.getCityWeatherByName(city.name)
 		.then((res) => {
-			cities.push(res.data);
+			ctrl.cities.push(res.data);
 		});
 	};
 	
-	const refreshCity = (index) => {
+	ctrl.refreshCity = (index) => {
 		WeatherService.getCityWeatherById(cities[index].id)
 		.then((res) => {
-			cities[index] = res.data;
+			ctrl.cities[index] = res.data;
 		});
 	};
 	
-	const refreshAll = () => {
-		cities.forEach((city, index) => {
+	ctrl.refreshAll = () => {
+		ctrl.cities.forEach((city, index) => {
 			WeatherService.getCityWeatherById(city.id)
 			.then((res) => {
-				cities[index] = res.data;
+				ctrl.cities[index] = res.data;
 			});
 		});
 	};
 	
-	const removeCity = (index) => {
-		cities.splice(index, 1);
+	ctrl.removeCity = (index) => {
+		ctrl.cities.splice(index, 1);
 	};
-	
-	Object.assign(this, {
-		cities,
-		addCity,
-		refreshCity,
-		refreshAll,
-		removeCity
-	});
 
 };
 

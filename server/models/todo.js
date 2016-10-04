@@ -11,7 +11,8 @@ const
 name_ = 'Todo',
 
 model_ = {
-	text: Sequelize.STRING
+	text: { type: Sequelize.STRING },
+	done: { type: Sequelize.BOOLEAN, defaultValue: false }
 },
 
 classMethods_ = {

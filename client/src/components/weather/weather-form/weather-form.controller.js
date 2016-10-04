@@ -1,21 +1,18 @@
-const WeatherCityCardController = function () {
+const WeatherFormController = function () {
+	
+	const ctrl = this;
 
-	const newCity = {
+	ctrl.newCity = {
 		name: ''
 	};
 
-	const addCity = () => {
-		this.onAddCity({
-			data: newCity
+	ctrl.addCity = () => {
+		ctrl.onAddCity({
+			data: ctrl.newCity
 		});
-		newCity.name = '';
+		ctrl.newCity.name = '';
 	};
-	
-	Object.assign(this, {
-		newCity,
-		addCity
-	});
 
 };
 
-export default WeatherCityCardController;
+export default WeatherFormController;

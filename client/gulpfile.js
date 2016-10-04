@@ -43,7 +43,14 @@ gulp.task('build', function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch([ './src/**/*.js', './src/**/*.html' ], [ 'build' ]);
+	gulp.watch(
+		[
+			'./src/**/*.js',
+			'./src/**/*.html',
+			'./src/**/*.css'
+		],
+		[ 'build' ]
+	);
 	gulp.watch(paths.appindex, [ 'copyAppIndex' ]);
 });
 

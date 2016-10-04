@@ -3,7 +3,7 @@
 exports = module.exports = function (userCtrl, utils) {
 
 	return {
-		prefix: '/user',
+		prefix: '/api/user',
 		routes: [
 			{
 				path: '/signin',

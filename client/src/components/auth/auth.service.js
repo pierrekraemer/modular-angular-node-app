@@ -1,7 +1,7 @@
 export const JWTInterceptor = ($window) => ({
 
     request: (config) => {
-		if (config.url.startsWith('/')) {
+		if (config.url.startsWith('/api')) {
 			config.headers = config.headers || {};
 			if ($window.sessionStorage.token) {
 				config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
@@ -19,7 +19,7 @@ export const AuthService = ($http, $window, $q, UserService) => {
 	return {
 
 		signin: (credentials) => {
-			return $http.post('/user/signin', credentials)
+			return $http.post('/api/user/signin', credentials)
 			.then((res) => {
 				$window.sessionStorage['token'] = res.data.token;
 				user = UserService.makeUser(res.data.user);
@@ -37,7 +37,7 @@ export const AuthService = ($http, $window, $q, UserService) => {
 				return $q.resolve(true);
 			} else {
 				return $q((resolve, reject) => {
-					$http.get('/user/whoami')
+					$http.get('/api/user/whoami')
 					.then((res) => {
 						user = UserService.makeUser(res.data);
 						resolve(true);
@@ -55,7 +55,7 @@ export const AuthService = ($http, $window, $q, UserService) => {
 				return $q.resolve(user);
 			} else {
 				return $q((resolve, reject) => {
-					$http.get('/user/whoami')
+					$http.get('/api/user/whoami')
 					.then((res) => {
 						user = UserService.makeUser(res.data);
 						resolve(user);

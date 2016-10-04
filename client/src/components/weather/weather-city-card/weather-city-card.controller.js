@@ -1,23 +1,20 @@
 const WeatherCityCardController = function () {
+	
+	const ctrl = this;
 
-	const refresh = () => {
-		this.onRefresh();
+	ctrl.refresh = () => {
+		ctrl.onRefresh();
 	};
 	
-	const close = () => {
-		this.onClose();
+	ctrl.close = () => {
+		ctrl.onClose();
 	};
 	
-	this.$onChanges = (changes) => {
+	ctrl.$onChanges = (changes) => {
 		if (changes.city) {
-			this.city = Object.assign({}, this.city);
+			ctrl.city = Object.assign({}, ctrl.city);
 		}
 	};
-	
-	Object.assign(this, {
-		refresh,
-		close
-	});
 
 };
 

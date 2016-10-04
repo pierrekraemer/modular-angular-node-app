@@ -4,7 +4,7 @@ const UserModel = {
 
 };
 
-const UserService = ($http) => ({
+const UserService = () => ({
 
     makeUser: (data) => {
         const u = Object.create(UserModel);

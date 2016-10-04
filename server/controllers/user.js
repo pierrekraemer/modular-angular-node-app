@@ -11,7 +11,7 @@ exports = module.exports = (userModel, secret) => (
 			userModel.findOne({
 				where: { username }
 			})
-			.then(function (user) {
+			.then((user) => {
 				if (!user) {
 					const err = new Error('User not found');
 					err.status = 404;
@@ -37,9 +37,7 @@ exports = module.exports = (userModel, secret) => (
 
 				return res.json({ user: user_without_password, token });
 			})
-			.catch(function (err) {
-				return next(err);
-			});
+			.catch((err) => next(err));
 		},
 		
 		getByToken: (req, res, next) => {

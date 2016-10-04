@@ -12,14 +12,13 @@
         <div class="collapse navbar-collapse" uib-collapse="$ctrl.data.isNavbarCollapsed">
             <ul class="nav navbar-nav">
                 <li ui-sref-active="active"> <a ui-sref="app.about"> About </a> </li>
-                <li ui-sref-active="active"> <a ui-sref="app.weather"> Weather </a> </li>
                 <li class="dropdown" uib-dropdown ng-show="$ctrl.user && $ctrl.user.hasRole('user')">
                     <a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button">
-                        User <span class="caret"></span>
+                        User apps <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li> <a> User action 1 </a> </li>
-                        <li> <a> User action 2 </a> </li>
+						<li ui-sref-active="active"> <a ui-sref="app.todo"> Todo </a> </li>
+						<li ui-sref-active="active"> <a ui-sref="app.weather"> Weather </a> </li>
                     </ul>
                 </li>
                 <li class="dropdown" uib-dropdown ng-show="$ctrl.user && $ctrl.user.hasRole('admin')">
