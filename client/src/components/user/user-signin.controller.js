@@ -4,7 +4,7 @@ const UserSigninController = function ($state, AuthService) {
 
     ctrl.data = {
         credentials: {
-    		name: '',
+    		username: '',
             password: ''
         },
         message: ''
@@ -16,7 +16,7 @@ const UserSigninController = function ($state, AuthService) {
 			$state.go('app.home', {}, { reload: true });
 		})
         .catch(function (err) {
-            ctrl.data.message = err.message;
+            ctrl.data.message = err.data;
             ctrl.data.credentials.password = '';
         });
     };

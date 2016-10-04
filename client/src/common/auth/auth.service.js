@@ -1,10 +1,12 @@
 export const JWTInterceptor = ($window) => ({
 
-    request : (config) => {
-        config.headers = config.headers || {};
-        if ($window.sessionStorage.token) {
-            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-        }
+    request: (config) => {
+		if (config.url.startsWith('/')) {
+			config.headers = config.headers || {};
+			if ($window.sessionStorage.token) {
+				config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+			}
+		}
         return config;
     }
 
@@ -12,45 +14,59 @@ export const JWTInterceptor = ($window) => ({
 
 export const AuthService = ($http, $window, $q, UserService) => {
 
-	let signedIn = false;
 	let user = null;
 
 	return {
 
 		signin: (credentials) => {
-			// return $http.post('/api/user/login', credentials)
-			// .then((res) => {
-			// 	$window.sessionStorage['token'] = res.data.token;
-			// 	return UserService.makeUser(res.data.user);
-			// });
-			
-			$window.sessionStorage['token'] = 'blabla';
-			signedIn = true;
-			
-			user = UserService.makeUser({
-				name: credentials.name,
-				roles: ['user', 'admin']
+			return $http.post('/user/signin', credentials)
+			.then((res) => {
+				$window.sessionStorage['token'] = res.data.token;
+				user = UserService.makeUser(res.data.user);
 			});
-			return $q.resolve();
-			
-			// return $q.resolve(
-			// 	UserService.makeUser({
-			// 		name: credentials.name,
-            //     	roles: ['user', 'admin']
-			// 	})
-			// );
 		},
 		
 		signout: () => {
 			delete $window.sessionStorage['token'];
-			signedIn = false;
 			user = null;
 			return $q.resolve();
 		},
 		
-		isSignedIn: () => signedIn,
+		isSignedIn: () => {
+			if (user) {
+				return $q.resolve(true);
+			} else {
+				return $q((resolve, reject) => {
+					$http.get('/user/whoami')
+					.then((res) => {
+						user = UserService.makeUser(res.data);
+						resolve(true);
+					})
+					.catch(() => {
+						user = null;
+						resolve(false);
+					});
+				});
+			}
+		},
 		
-		user: () => user
+		user: () => {
+			if (user) {
+				return $q.resolve(user);
+			} else {
+				return $q((resolve, reject) => {
+					$http.get('/user/whoami')
+					.then((res) => {
+						user = UserService.makeUser(res.data);
+						resolve(user);
+					})
+					.catch(() => {
+						user = null;
+						resolve(user);
+					});
+				});
+			}
+		}
 
 	};
 

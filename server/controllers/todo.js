@@ -2,24 +2,24 @@
 
 exports = module.exports = (todoModel) => (
 	{
-		getAll : (req, res, next) => {
-			console.log('todo : getAll');
+		getAll: (req, res, next) => {
+			console.log('todo: getAll');
 		},
 
-		getById : (req, res, next) => {
-			console.log('todo : getById');
+		getById: (req, res, next) => {
+			console.log('todo: getById');
 		},
 
-		create : (req, res, next) => {
-			console.log('todo : create');
+		create: (req, res, next) => {
+			console.log('todo: create');
 		},
 
-		updateById : (req, res, next) => {
-			console.log('todo : updateById');
+		updateById: (req, res, next) => {
+			console.log('todo: updateById');
 		},
 
-		deleteById : (req, res, next) => {
-			console.log('todo : deleteById');
+		deleteById: (req, res, next) => {
+			console.log('todo: deleteById');
 		}
 	}
 );

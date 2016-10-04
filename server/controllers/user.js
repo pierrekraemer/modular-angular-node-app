@@ -1,31 +1,61 @@
 'use strict';
 
-exports = module.exports = (userModel) => (
+const jsonwebtoken = require('jsonwebtoken');
+
+exports = module.exports = (userModel, secret) => (
 	{
-		getAll : (req, res, next) => {
-			console.log('user : getAll');
-		},
+		signin: (req, res, next) => {
+        	const username = req.body.username || '';
+        	const password = req.body.password || '';
 
-		getById : (req, res, next) => {
-			console.log('user : getById');
-		},
+			userModel.findOne({
+				where: { username }
+			})
+			.then(function (user) {
+				if (!user) {
+					const err = new Error('User not found');
+					err.status = 404;
+					throw err;
+				}
+				if (!user.validatePassword(password)) {
+					const err = new Error('Wrong password');
+					err.status = 401;
+					throw err;
+				}
 
-		create : (req, res, next) => {
-			console.log('user : create');
-		},
+				const user_without_password = {
+					id: user.id,
+					username: user.username,
+					roles: user.roles
+				};
 
-		updateById : (req, res, next) => {
-			console.log('user : updateById');
-		},
+				const token = jsonwebtoken.sign(
+					{ id: user.id },
+					secret,
+					{ expiresIn: 60 * 60 * 12 }
+				);
 
-		deleteById : (req, res, next) => {
-			console.log('user : deleteById');
+				return res.json({ user: user_without_password, token });
+			})
+			.catch(function (err) {
+				return next(err);
+			});
+		},
+		
+		getByToken: (req, res, next) => {
+			const user_without_password = {
+				id: req.user.id,
+				username: req.user.username,
+				roles: req.user.roles
+			};
+			return res.json(user_without_password);
 		}
 	}
 );
 
 exports['@require'] = [
-	'models/user'
+	'models/user',
+	'config/secret'
 ];
 
 exports['@singleton'] = true;

@@ -2,9 +2,9 @@
 
 const
 Sequelize = require('sequelize'),
-bcrypt = require('bcrypt-nodejs');
+bcrypt = require('bcrypt');
 
-var
+let
 db_,
 User_;
 
@@ -14,7 +14,7 @@ name_ = 'User',
 model_ = {
 	username: Sequelize.STRING,
 	password: Sequelize.STRING,
-	roles   : {
+	roles: {
 		type: Sequelize.STRING,
 		get: function () {
 			return this.getDataValue('roles').split(',');
@@ -30,7 +30,7 @@ classMethods_ = {
 		User_.hasMany(models.Todo);
 		// User_.belongsToMany(models.OtherModel);
 	},
-	generateHash: (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null),
+	generateHash: (password) => bcrypt.hashSync(password, 10),
 	roles: () => (
 		{
 			admin: 'admin',
@@ -40,13 +40,9 @@ classMethods_ = {
 },
 
 instanceMethods_ = {
-	validatePassword : function (password) {
-		return bcrypt.compareSync(password, this.password);
-	},
-	hasRole : function (role) {
-		return this.roles.includes(role);
-	},
-	addRole : function (role) {
+	validatePassword: function (password) { return bcrypt.compareSync(password, this.password); },
+	hasRole: function (role) { return this.roles.includes(role); },
+	addRole: function (role) {
 		if (!this.roles.includes(role)) {
 			this.roles.push(role);
 		}
@@ -61,7 +57,7 @@ exports = module.exports = (db) => {
 		model_,
 		{
             classMethods: classMethods_,
-            instanceMethods : instanceMethods_
+            instanceMethods: instanceMethods_
         }
 	);
 

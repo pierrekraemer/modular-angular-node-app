@@ -18,7 +18,7 @@ const user = angular
     })
 	.state('app.signout', {
 		url: '/signout',
-		onEnter: function ($state, AuthService) {
+		onEnter: ($state, AuthService) => {
 			AuthService.signout()
 			.then(() => {
 				$state.go('app.home', {}, { reload: true });

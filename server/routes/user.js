@@ -1,37 +1,25 @@
 'use strict';
 
-exports = module.exports = function (userCtrl) {
+exports = module.exports = function (userCtrl, utils) {
 
 	return {
 		prefix: '/user',
 		routes: [
 			{
-				path: '/',
+				path: '/signin',
 				usage: [
 					{
-						verb: 'get',
-						func: [ userCtrl.getAll ]
-					},
-					{
 						verb: 'post',
-						func: [ userCtrl.create ]
+						func: userCtrl.signin
 					}
 				]
 			},
 			{
-				path: '/:userid',
+				path: '/whoami',
 				usage: [
 					{
 						verb: 'get',
-						func: [ userCtrl.getById ]
-					},
-					{
-						verb: 'put',
-						func: [ userCtrl.updateById ]
-					},
-					{
-						verb: 'delete',
-						func: [ userCtrl.deleteById ]
+						func: [ utils.identifyUser, userCtrl.getByToken ]
 					}
 				]
 			}
@@ -41,7 +29,8 @@ exports = module.exports = function (userCtrl) {
 };
 
 exports['@require'] = [
-	'controllers/user'
+	'controllers/user',
+	'services/utils'
 ];
 
 exports['@singleton'] = true;

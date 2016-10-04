@@ -21,10 +21,10 @@ app.use(body_parser.json());
 app.all('*', (req, res, next) => {
 	res.set('Access-Control-Allow-Origin', 'http://localhost');
 	res.set('Access-Control-Allow-Credentials', true);
-	res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
+	res.set('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, DELETE, PUT');
 	res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
 	if (req.method === 'OPTIONS') {
-		return res.send(200);
+		return res.status(200).end();
 	} else {
 		next();
 	}
@@ -45,7 +45,7 @@ Object.keys(models).forEach((model_name) => {
 	models[model_name].associate(models);
 });
 
-db.connection.sync({ force: true });
+db.connection.sync({ /*force: true*/ });
 
 
 const routers_data = require('./routes');
@@ -54,9 +54,7 @@ routers_data.forEach((router_data) => {
 
 	router_data.routes.forEach((route_data) => {
 		const r = router.route(route_data.path);
-		route_data.usage.forEach(function (u) {
-			r[u.verb](u.func);
-		});
+		route_data.usage.forEach((u) => { r[u.verb](u.func); });
 	});
 
 	router.use((err, req, res, next) => {

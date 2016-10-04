@@ -2,10 +2,10 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
 
-import AppComponent from './app.component';
-
 import common from './common';
 import components from './components';
+
+import AppComponent from './app.component';
 
 angular
 .module('app', [
@@ -16,16 +16,6 @@ angular
 ])
 
 .component('app', AppComponent)
-
-.run(($transitions) => {
-	$transitions.onBefore(
-		{ to: (state) => state.data && state.data.authRequired },
-		(transition) => {
-			const AuthService = transition.injector().get('AuthService');
-			return AuthService.isSignedIn();
-		}
-	);
-})
 
 .config(($httpProvider, $urlRouterProvider, $locationProvider, $stateProvider) => {
 	$httpProvider.interceptors.push('JWTInterceptor');
@@ -41,4 +31,14 @@ angular
 			user: (AuthService) => AuthService.user()
 		}
     });
+})
+
+.run(($transitions) => {
+	$transitions.onBefore(
+		{ to: (state) => state.data && state.data.authRequired },
+		(transition) => {
+			const AuthService = transition.injector().get('AuthService');
+			return AuthService.isSignedIn();
+		}
+	);
 });
