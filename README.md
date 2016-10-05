@@ -6,27 +6,25 @@ Structure
 
 ### Client side
 
-The client code is organized using components and es6 modules following [Todd Motto's style guide](https://github.com/toddmotto/angular-styleguide).
+The client code is organized using components and es6 modules (almost) following [Todd Motto's style guide](https://github.com/toddmotto/angular-styleguide).
 
 ```
 client/
   |-src/
-  |  |-app.js                    --> main module of the application (loads components & common module and vendor libs)
-  |  |-app.component.js          --> root component of the application
-  |  |-app.css                   --> css associated with the root component
   |  |-index.html                --> main html structure
+  |  |-app.module.js             --> main module of the application (loads components module and vendor libs)
+  |  |-app.component.js          --> root component of the application
+  |  |-app.template.html         --> root component template
+  |  |-app.css                   --> root component css
   |  |-components/
   |  |  |-index.js               --> components module (loads all components modules)
   |  |  |-home/
   |  |  |  |-index.js            --> home module
   |  |  |  |-home.component.js   --> home component
-  |  |  |  |-home.controller.js  --> home controller
+  |  |  |  |-home.controller.js  --> home component controller
+  |  |  |  |-home.template.html  --> home component template
   |  |  |  |-...                 --> could also provide services, css, sub-modules, ...
-  |  |-common/
-  |  |  |-index.js               --> common module (loads all common modules)
-  |  |  |-nav/
-  |  |  |  |-index.js            --> nav module
-  |  |  |  |-...
+  |  |  |-...
   |-package.json                 --> description of dependencies
   |-gulpfile.js                  --> description of build tasks
 ```
