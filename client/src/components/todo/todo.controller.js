@@ -2,6 +2,15 @@ const TodoController = function (TodoService) {
 	
 	const ctrl = this;
 	
+	ctrl.todoFilter = 'all';
+	ctrl.filter = (todo) => {
+		switch (ctrl.todoFilter) {
+			case 'all': return true; break;
+			case 'todo': return todo.done === false; break;
+			case 'done': return todo.done === true; break;
+		}
+	};
+	
 	ctrl.addTodo = (todo) => {
 		return TodoService.addTodo(todo)
 		.then((res) => {
@@ -9,17 +18,19 @@ const TodoController = function (TodoService) {
 		});
 	};
 	
-	ctrl.updateTodo = (index, data) => {
-		return TodoService.updateTodo(ctrl.todos[index].id, data)
+	ctrl.updateTodo = (todoid, changes) => {
+		const idx = ctrl.todos.findIndex((todo) => todo.id === todoid);
+		return TodoService.updateTodo(todoid, changes)
 		.then((res) => {
-			ctrl.todos[index] = res.data;
+			ctrl.todos[idx] = res.data;
 		});
 	};
 	
-	ctrl.removeTodo = (index) => {
-		return TodoService.removeTodo(ctrl.todos[index].id)
+	ctrl.removeTodo = (todoid) => {
+		const idx = ctrl.todos.findIndex((todo) => todo.id === todoid);
+		return TodoService.removeTodo(todoid)
 		.then((res) => {
-			ctrl.todos.splice(index, 1);	
+			ctrl.todos.splice(idx, 1);
 		});
 	};
 

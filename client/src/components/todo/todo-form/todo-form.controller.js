@@ -8,7 +8,7 @@ const TodoFormController = function () {
 
 	ctrl.addTodo = () => {
 		ctrl.onAddTodo({
-			data: ctrl.newTodo
+			todo: ctrl.newTodo
 		})
 		.then(() => { ctrl.newTodo.text = ''; });
 	};

@@ -4,17 +4,23 @@ const TodoItemController = function () {
 	
 	ctrl.done = () => {
 		ctrl.onUpdate({
-			data: { done: true }
+			todoid: ctrl.todo.id,
+			changes: { done: true }
 		});
 	};
 	
 	ctrl.undone = () => {
 		ctrl.onUpdate({
-			data: { done: false }
+			todoid: ctrl.todo.id,
+			changes: { done: false }
 		});
 	};
 
-	ctrl.remove = () => { ctrl.onRemove(); };
+	ctrl.remove = () => {
+		ctrl.onRemove({
+			todoid: ctrl.todo.id
+		});
+	};
 	
 	ctrl.$onChanges = (changes) => {
 		if (changes.todo) {

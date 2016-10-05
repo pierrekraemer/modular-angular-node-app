@@ -3,11 +3,14 @@ import angular from 'angular';
 import todoForm from './todo-form';
 import todoItem from './todo-item';
 
+import buttons from 'angular-ui-bootstrap/src/buttons';
+
 import TodoService from './todo.service';
 import TodoComponent from './todo.component';
 
 const todo = angular
 .module('todo', [
+	buttons,
 	todoForm,
 	todoItem
 ])

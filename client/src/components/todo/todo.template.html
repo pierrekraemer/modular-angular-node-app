@@ -1,11 +1,21 @@
 <div class="row mt-15">
-    <todo-form class="col-xs-12" on-add-todo="$ctrl.addTodo(data)"> </todo-form>
+    <todo-form class="col-xs-offset-2 col-xs-8" on-add-todo="$ctrl.addTodo(todo)"> </todo-form>
 </div>
 
 <div class="row mt-15">
-	<ul class="col-xs-offset-2 col-xs-8 list-group">
-		<li class="list-group-item" ng-repeat="todo in $ctrl.todos">
-			<todo-item todo="todo" on-update="$ctrl.updateTodo($index, data)" on-remove="$ctrl.removeTodo($index)"> </todo-item>
-		</li>
-	</ul>
+	<div class="col-xs-offset-2 col-xs-8 ">
+		<div class="btn-group btn-group-justified">
+			<label class="btn btn-info" ng-model="$ctrl.todoFilter" uib-btn-radio="'all'"> All </label>
+			<label class="btn btn-info" ng-model="$ctrl.todoFilter" uib-btn-radio="'todo'"> Todo </label>
+			<label class="btn btn-info" ng-model="$ctrl.todoFilter" uib-btn-radio="'done'"> Done </label>
+		</div>
+	</div>
+	
+	<div class="col-xs-offset-2 col-xs-8 mt-15">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="todo in $ctrl.todos | filter:$ctrl.filter">
+				<todo-item todo="todo" on-update="$ctrl.updateTodo(todoid, changes)" on-remove="$ctrl.removeTodo(todoid)"> </todo-item>
+			</li>
+		</ul>
+	</div>
 </div>

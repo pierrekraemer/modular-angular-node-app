@@ -5,7 +5,7 @@ import dropdown from 'angular-ui-bootstrap/src/dropdown';
 import NavComponent from './nav.component';
 
 const nav = angular
-.module('nav', [collapse, dropdown])
+.module('nav', [ collapse, dropdown ])
 .component('appNav', NavComponent)
 .name;
 
