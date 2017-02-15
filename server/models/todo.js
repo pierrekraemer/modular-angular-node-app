@@ -1,45 +1,24 @@
 'use strict';
 
-const
-Sequelize = require('sequelize');
+module.exports = function (sequelize, DataTypes) {
 
-var
-db_,
-Todo_;
-
-const
-name_ = 'Todo',
-
-model_ = {
-	text: { type: Sequelize.STRING },
-	done: { type: Sequelize.BOOLEAN, defaultValue: false }
-},
-
-classMethods_ = {
-	associate: function (models) {
-        Todo_.belongsTo(models.User);
-	}
-},
-
-instanceMethods_ = {};
-
-
-exports = module.exports = (db) => {
-	db_ = db;
-	Todo_ = db.connection.define(
-		name_,
-		model_,
+	const Todo = sequelize.define(
+		'Todo',
 		{
-            classMethods: classMethods_,
-            instanceMethods : instanceMethods_
-        }
+			text: { type: DataTypes.STRING },
+			done: { type: DataTypes.BOOLEAN, defaultValue: false }
+		},
+		{
+			underscored: true,
+			classMethods: {
+				associate: function (db) {
+					Todo.belongsTo(db.User);
+				}
+			},
+			instanceMethods: {}
+		}
 	);
 
-	return Todo_;
+	return Todo;
+
 };
-
-exports['@require'] = [
-	'config/db'
-];
-
-exports['@singleton'] = true;

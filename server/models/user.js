@@ -1,71 +1,58 @@
 'use strict';
 
 const
-Sequelize = require('sequelize'),
 bcrypt = require('bcrypt');
 
-let
-db_,
-User_;
+module.exports = function (sequelize, DataTypes) {
 
-const
-name_ = 'User',
-
-model_ = {
-	username: Sequelize.STRING,
-	password: Sequelize.STRING,
-	roles: {
-		type: Sequelize.STRING,
-		get: function () {
-			return this.getDataValue('roles').split(',');
+	const User = sequelize.define(
+		'User',
+		{
+			username: DataTypes.STRING,
+			password: DataTypes.STRING,
+			roles: {
+				type: DataTypes.STRING,
+				get: function () {
+					const r = this.getDataValue('roles');
+					if (r) { return r.split(','); }
+					else { return []; }
+				},
+				set: function (value) {
+					if (Array.isArray(value)) {
+						this.setDataValue('roles', value.join(','));
+					} else {
+						this.setDataValue('roles', [ value ]);
+					}
+				}
+			}
 		},
-		set: function (value) {
-			this.setDataValue('roles', value.join(','));
-		}
-	}
-},
-
-classMethods_ = {
-	associate: function (models) {
-		User_.hasMany(models.Todo);
-		// User_.belongsToMany(models.OtherModel);
-	},
-	generateHash: (password) => bcrypt.hashSync(password, 10),
-	roles: () => (
 		{
-			admin: 'admin',
-			user: 'user'
+			underscored: true,
+			classMethods: {
+				associate: function (db) {
+					User.hasMany(db.Todo);
+					// User_.belongsToMany(models.OtherModel);
+				},
+				generateHash: (password) => bcrypt.hashSync(password, 10),
+				roles: () => (
+					{
+						admin: 'admin',
+						user: 'user'
+					}
+				)
+			},
+			instanceMethods: {
+				validatePassword: function (password) { return bcrypt.compareSync(password, this.password); },
+				hasRole: function (role) { return this.roles.includes(role); },
+				addRole: function (role) {
+					if (!this.roles.includes(role)) {
+						this.roles.push(role);
+					}
+				}
+			}
 		}
-	)
-},
-
-instanceMethods_ = {
-	validatePassword: function (password) { return bcrypt.compareSync(password, this.password); },
-	hasRole: function (role) { return this.roles.includes(role); },
-	addRole: function (role) {
-		if (!this.roles.includes(role)) {
-			this.roles.push(role);
-		}
-	}
-};
-
-
-exports = module.exports = (db) => {
-	db_ = db;
-	User_ = db.connection.define(
-		name_,
-		model_,
-		{
-            classMethods: classMethods_,
-            instanceMethods: instanceMethods_
-        }
 	);
 
-	return User_;
+	return User;
+
 };
-
-exports['@require'] = [
-	'config/db'
-];
-
-exports['@singleton'] = true;

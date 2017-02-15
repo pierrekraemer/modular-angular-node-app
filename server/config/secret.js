@@ -1,5 +1,3 @@
 'use strict';
 
-exports = module.exports = () => 'fzef)-%Fez+/.zefzvs(:}svd)';
-
-exports['@singleton'] = true;
+module.exports = 'fzef)-%Fez+/.zefzvs(:}svd)';

@@ -2,21 +2,29 @@
 
 const
 fs = require('fs'),
-ioc = require('electrolyte');
+Sequelize = require('sequelize');
 
-exports = module.exports = (() => {
+// create Sequelize instance
+const sequelize = new Sequelize('apptest', 'apptest', 'apptest', {
+	host: 'localhost',
+	port: 3306,
+	dialect: 'mysql'
+	// logging: false
+});
 
-	const models = {};
+const db = {};
 
-	fs.readdirSync(__dirname)
-	.forEach((filename) => {
-		if (filename !== 'index.js') {
-			const name = filename.replace(/\.[^/.]+$/, '');
-			const model = ioc.create('models/' + name);
-			models[model.name] = model;
-		}
-	});
+fs.readdirSync(__dirname)
+.filter((filename) => filename !== 'index.js')
+.forEach((filename) => {
+	const model = sequelize.import('./' + filename);
+	db[model.name] = model;
+});
 
-	return models;
+Object.keys(db).forEach((modelName) => {
+	db[modelName].associate(db);
+});
 
-})();
+sequelize.sync();
+
+module.exports = db;

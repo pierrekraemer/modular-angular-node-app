@@ -1,36 +1,29 @@
 'use strict';
 
-exports = module.exports = function (userCtrl, utils) {
+const
+utils = require('../services/utils'),
+userCtrl = require('../controllers/user');
 
-	return {
-		prefix: '/api/user',
-		routes: [
-			{
-				path: '/signin',
-				usage: [
-					{
-						verb: 'post',
-						func: userCtrl.signin
-					}
-				]
-			},
-			{
-				path: '/whoami',
-				usage: [
-					{
-						verb: 'get',
-						func: [ utils.identifyUser, userCtrl.getByToken ]
-					}
-				]
-			}
-		]
-	};
-
+module.exports = {
+	prefix: '/api/user',
+	routes: [
+		{
+			path: '/signin',
+			usage: [
+				{
+					verb: 'post',
+					func: userCtrl.signin
+				}
+			]
+		},
+		{
+			path: '/whoami',
+			usage: [
+				{
+					verb: 'get',
+					func: [ utils.identifyUser, userCtrl.getByToken ]
+				}
+			]
+		}
+	]
 };
-
-exports['@require'] = [
-	'controllers/user',
-	'services/utils'
-];
-
-exports['@singleton'] = true;
